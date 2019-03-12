@@ -1,0 +1,152 @@
+version: 2
+
+environment:
+  BUNDLE_GEMFILE: gemfiles/ruby-others
+
+jobs:
+
+  job8:
+    docker:
+      - image: circleci/ruby:1.9
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-1.9
+      - SKIP_RUBOCOP: true
+      - SKIP_SINGLECOV: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job20:
+    docker:
+      - image: circleci/ruby:2.0
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-2.0
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job31:
+    docker:
+      - image: circleci/ruby:2.1
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-2.0
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job42:
+    docker:
+      - image: circleci/ruby:2.2
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-2.0
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job53:
+    docker:
+      - image: circleci/ruby:2.3
+    environment:
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job63:
+    docker:
+      - image: circleci/ruby:2.4
+    environment:
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job73:
+    docker:
+      - image: circleci/ruby:2.5    # with rubocop
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job81:
+    docker:
+      - image: circleci/ruby:2.6
+    environment:
+      - SKIP_RUBOCOP: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job92:
+    docker:
+      - image: circleci/jruby:1.7
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-1.9
+      - SKIP_RUBOCOP: true
+      - SKIP_SINGLECOV: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job104:
+    docker:
+      - image: circleci/jruby:9.0
+    environment:
+      - BUNDLE_GEMFILE: gemfiles/ruby-2.0
+      - SKIP_RUBOCOP: true
+      - SKIP_SINGLECOV: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job116:
+    docker:
+      - image: circleci/jruby:9.1
+    environment:
+      - SKIP_RUBOCOP: true
+      - SKIP_SINGLECOV: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+  job127:
+    docker:
+      - image: circleci/jruby:9.2
+    environment:
+      - SKIP_RUBOCOP: true
+      - SKIP_SINGLECOV: true
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake default
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - job8
+      - job20
+      - job31
+      - job42
+      - job53
+      - job63
+      - job73
+      - job81
+      - job92
+      - job104
+      - job116
+      - job127
