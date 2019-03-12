@@ -9,7 +9,7 @@ gem 'rack'
 gem 'i18n'
 gem 'single_cov', '~> 1.3' unless ENV['SKIP_SINGLECOV']
 # include minor since it constantly adds new cops
-gem 'rubocop', '~> 0.63.1' unless ENV['SKIP_RUBOCOP']
+gem 'rubocop', '~> 0.63.1'
 
 # development
 # gem 'slim'

@@ -10,7 +10,6 @@ jobs:
       - image: circleci/ruby:1.9
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-1.9
-      - SKIP_RUBOCOP: true
       - SKIP_SINGLECOV: true
     steps:
       - checkout
@@ -22,7 +21,6 @@ jobs:
       - image: circleci/ruby:2.0
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-2.0
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -33,7 +31,6 @@ jobs:
       - image: circleci/ruby:2.1
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-2.0
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -44,7 +41,6 @@ jobs:
       - image: circleci/ruby:2.2
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-2.0
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -54,7 +50,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.3
     environment:
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -64,7 +59,6 @@ jobs:
     docker:
       - image: circleci/ruby:2.4
     environment:
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -72,17 +66,24 @@ jobs:
 
   job73:
     docker:
-      - image: circleci/ruby:2.5    # with rubocop
+      - image: circleci/ruby:2.5
     steps:
       - checkout
       - run: bundle install
       - run: bundle exec rake default
 
+  rubocop:
+    docker:
+      - image: circleci/ruby
+    steps:
+      - checkout
+      - run: bundle install
+      - run: bundle exec rake rubocop
+
   job81:
     docker:
       - image: circleci/ruby:2.6
     environment:
-      - SKIP_RUBOCOP: true
     steps:
       - checkout
       - run: bundle install
@@ -93,7 +94,6 @@ jobs:
       - image: circleci/jruby:1.7
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-1.9
-      - SKIP_RUBOCOP: true
       - SKIP_SINGLECOV: true
     steps:
       - checkout
@@ -105,7 +105,6 @@ jobs:
       - image: circleci/jruby:9.0
     environment:
       - BUNDLE_GEMFILE: gemfiles/ruby-2.0
-      - SKIP_RUBOCOP: true
       - SKIP_SINGLECOV: true
     steps:
       - checkout
@@ -116,7 +115,6 @@ jobs:
     docker:
       - image: circleci/jruby:9.1
     environment:
-      - SKIP_RUBOCOP: true
       - SKIP_SINGLECOV: true
     steps:
       - checkout
@@ -127,7 +125,6 @@ jobs:
     docker:
       - image: circleci/jruby:9.2
     environment:
-      - SKIP_RUBOCOP: true
       - SKIP_SINGLECOV: true
     steps:
       - checkout
@@ -150,3 +147,4 @@ workflows:
       - job104
       - job116
       - job127
+      - rubocop
